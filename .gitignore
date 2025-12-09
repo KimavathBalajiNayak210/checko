@@ -1,0 +1,14 @@
+.next
+.turbo
+node_modules
+pnpm-lock.yaml
+dist
+build
+.env
+.env.local
+.env.production
+.env.development
+*.log
+!.vercel/output
+.DS_Store
+node_modules

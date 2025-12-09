@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, MapPin, Phone, User, Loader2 } from "lucide-react"
@@ -23,6 +23,13 @@ export default function CheckoutPage() {
 
   const restaurant = restaurants.find((r) => r.id === restaurantId)
   const total = getTotal()
+
+  useEffect(() => {
+    // Avoid calling router on the server during prerender; redirect on client after mount
+    if (items.length === 0) {
+      router.replace("/cart")
+    }
+  }, [items.length, router])
 
   const handlePlaceOrder = async () => {
     if (!name || !phone || !address) {
@@ -62,10 +69,7 @@ export default function CheckoutPage() {
     router.push(`/orders/${order.id}`)
   }
 
-  if (items.length === 0) {
-    router.push("/cart")
-    return null
-  }
+  if (items.length === 0) return null
 
   return (
     <div className="min-h-screen bg-background pb-40">

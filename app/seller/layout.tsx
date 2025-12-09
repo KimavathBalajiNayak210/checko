@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { SellerProvider } from "@/lib/seller-store"
 
 export const metadata: Metadata = {
   title: "Seller Dashboard - QuickBite",
@@ -11,5 +12,5 @@ export default function SellerLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return <SellerProvider>{children}</SellerProvider>
 }
